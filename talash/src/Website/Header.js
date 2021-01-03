@@ -5,42 +5,37 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <header id="header" class="fixed-top d-flex align-items-center   "  style={{color:'black'}}>
-      
+        <header id="header" class="fixed-top d-flex align-items-center   ">
           <div class="container d-flex align-items-center">
-          
             <div class="logo mr-auto">
-           
               <h1 class="text-light">
-                <Link to="/" style={{ fontSize:'150%'}}>TALAASH</Link>
+                <Link to="/">TALAASH</Link>
               </h1>
               {/* <!-- Uncomment below if you prefer to use an image logo --> */}
-              <Link to="">
-               
-              </Link>
+              <Link to=""></Link>
             </div>
 
             <nav class="nav-menu d-none d-lg-block">
               <ul>
                 <li>
-                  <Link to="/"style={{ fontSize:'150%'}}>Home</Link>
+                  <Link to="/">Home</Link>
                 </li>
 
                 <li>
-                  <Link to="services" style={{ fontSize:'150%'}}>Services</Link>
+                  <Link to="services">Services</Link>
                 </li>
-               
+
                 <li>
-                  <Link to="about" style={{ fontSize:'150%'}}>About</Link>
+                  <Link to="about">About</Link>
                   {/* <a href="about">About</a> */}
                 </li>
                 <li>
-                  <Link to="Demo"style={{ fontSize:'150%'}}>Demo</Link>
+                  <Link to="Demo">Demo</Link>
                   {/* <a href="about">About</a> */}
                 </li>
-                
+
                 <li>
-                  <Link to="login"style={{ fontSize:'150%'}}>Login</Link>
+                  <Link to="login">Login</Link>
                 </li>
                 {/* <li>
                   <Link to="team">Team</Link>
