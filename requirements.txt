@@ -1,0 +1,7 @@
+pip
+https://visualstudio.microsoft.com/thank-you-for-downloading-visual-studio-for-cplusplus/?sku=Community&rel=16&rid=30005
+numpy==1.19.4
+cmake==3.18.4.post1
+dlib==19.21.1
+face-recognition== 1.3.0
+python-csv==0.0.13

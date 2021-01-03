@@ -1,0 +1,49 @@
+#frm {
+  text-align: center;
+  font-family: Leelawadee;
+}
+#fld {
+  width: 45%;
+  box-shadow: 10px 10px 10px lightblue;
+  margin: 100px auto;
+  padding-top: 30px;
+  border-color: lightskyblue;
+}
+legend {
+  font-size: 40px;
+}
+#email {
+  color: lightslategray;
+}
+#pass {
+  color: lightslategray;
+}
+input {
+  color: black;
+}
+
+.input1 {
+  color: black;
+  text-align: center;
+  padding: 8px;
+}
+input:focus {
+  background-color: lavender;
+}
+.btn1 {
+  background-color: rgb(98, 175, 219);
+  border: 0;
+  border-radius: 3px;
+  padding: 10px;
+  width: 120px;
+  height: 40px;
+  cursor: pointer;
+  color: white;
+  transition: all 0.5s ease-in-out;
+  outline: 0;
+}
+.btn1:hover {
+  background-color: dodgerblue;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
