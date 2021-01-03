@@ -12,8 +12,7 @@ app.use("/api", require("./Api/Organization"));
 app.use("/api", require("./Api/Trustee"));
 app.use("/api", require("./Api/faceApi"));
 app.use("/api", require("./Api/comment"));
-//app.use("/api", require("./Api/search"));
-//app.use("/api/login", require("./Api/User"))
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
