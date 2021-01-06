@@ -7,7 +7,7 @@ import sys
 from csv import writer
 import csv
 import os
-
+import urllib.request
 
 
 inputfilepath = 'https://res.cloudinary.com/dztyioznk/image/upload/v1609969742/reportPics/c63dewtepxd4rfsogjuw.jpg'
