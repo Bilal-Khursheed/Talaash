@@ -12,10 +12,10 @@ import os
 # if len(sys.argv<2):
 #     print("Not enough arguments")
 # else:
-#     inputfilepath = sys.argv[1]
+#     inputfilepath = sys.argv[1] talash\public\upload\sunaa.jpeg
 
-#inputfilepath = 'TALAASH\\talash\\public\\Reportpics\\1871.jpg'
-inputfilepath = sys.argv[1]
+inputfilepath = 'TALAASH\\talash\\public\\upload\\sunaa.jpeg'
+#inputfilepath = sys.argv[1]
 # print(inputfilepath)
 readimage = face_recognition.load_image_file(inputfilepath)
 unknown_Encodings = face_recognition.face_encodings(readimage)[0]
