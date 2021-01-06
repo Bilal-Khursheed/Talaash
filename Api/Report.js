@@ -32,26 +32,27 @@ route.post("/report", async (req, res) => {
   } = req.query;
   //const url = "Reportpics/" + req.file.originalname;
   const url = image;
-  //const fileadd = "talash\\public\\Reportpics\\" + req.file.originalname;
-  // const python = spawn("python", [
-  //   "register.py",
-  //   fileadd,
-  //   name,
-  //   gender,
-  //   age,
-  //   time,
-  //   address,
-  //   wear,
-  //   phone,
-  // ]);
-  // python.stdout.on("data", function (data) {
-  //   console.log("Pipe data from python script ...");
-  //   //largeDataSet.push(data);Name, Gender, Age, Time, Address, Wear,Contact
-  // });
-  // // in close event we are sure that stream is from child process is closed
-  // python.on("close", (code) => {
-  //   console.log(`child process close all stdio with code ${code}`);
-  // });
+  // const fileadd = "talash\\public\\Reportpics\\" + req.file.originalname;
+  const fileadd = image;
+  const python = spawn("python", [
+    "register.py",
+    fileadd,
+    name,
+    gender,
+    age,
+    time,
+    address,
+    wear,
+    phone,
+  ]);
+  python.stdout.on("data", function (data) {
+    console.log("Pipe data from python script ...");
+    //largeDataSet.push(data);Name, Gender, Age, Time, Address, Wear,Contact
+  });
+  // in close event we are sure that stream is from child process is closed
+  python.on("close", (code) => {
+    console.log(`child process close all stdio with code ${code}`);
+  });
   // send data to browser
 
   console.log("here is the user email", User_Email);

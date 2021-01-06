@@ -29,7 +29,7 @@ route.post("/faceapi",  (req, res) => {
   //   Address,
   //   Wear,
   //   Phone = "";
-  const url = "talash\\public\\upload\\" + req.file.originalname;
+  const url = req.query.image
   // spawn new child process to call the python script
   //clientTalaash\public\upload
   console.log(url);
