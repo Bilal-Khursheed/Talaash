@@ -10,7 +10,7 @@ import os
 import urllib.request
 
 
-inputfilepath = 'https://res.cloudinary.com/dztyioznk/image/upload/v1609969742/reportPics/c63dewtepxd4rfsogjuw.jpg'
+inputfilepath = sys.argv[1]
 response = urllib.request.urlopen(inputfilepath)
 readimage = face_recognition.load_image_file(response)
 unknown_Encodings = face_recognition.face_encodings(readimage)[0]
@@ -26,5 +26,5 @@ with open("datafile.csv", "r") as csv_file:
             print(lines[0], ",", lines[1], ",", lines[2], ",",
                   lines[3], ",", lines[4], ",", lines[5], ",", lines[6])
 
-    os.remove(inputfilepath)
+
 

@@ -8,6 +8,7 @@ import numpy as np
 import face_recognition
 import sys
 from csv import writer
+import urllib.request
 
 
 def append_list_as_row(file_name, list_of_elem):
@@ -28,7 +29,8 @@ Address = sys.argv[6]
 Wear = sys.argv[7]
 Phone = sys.argv[8]
 
-readimage = face_recognition.load_image_file(inputfilepath)
+response = urllib.request.urlopen(inputfilepath)
+readimage = face_recognition.load_image_file(response)
 Encodings = face_recognition.face_encodings(readimage)[0]
 row_contents = [Name, Gender, Age, Time, Address, Wear, Phone, Encodings]
 append_list_as_row('datafile.csv', row_contents)
