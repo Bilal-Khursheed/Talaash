@@ -28,6 +28,7 @@ class CommonPortal extends Component {
     loading: false,
     reportImage: {},
     comment: "",
+    image_url: "",
     navigate: false,
   };
 
@@ -66,26 +67,39 @@ class CommonPortal extends Component {
       });
   }
 
-  loadFile = (e) => {
-    //console.log("here is the  image", typeof e.target.files[0]);
-    this.setState({
-      selectedFile: e.target.files[0],
-    });
-    const file = new FileReader();
-    file.addEventListener("load", () => {
-      localStorage.setItem("image", file.result);
-    });
-    file.readAsDataURL(e.target.files[0]);
-
-    // this.setState(
-    //   Object.assign(this.state.reportImage, JSON.parse(e.target.files[0]))
-    // );
-
+  loadFile = async (e) => {
     var image = document.getElementById("output");
     const imageToBase64 = ImgToBase64;
     image.src = URL.createObjectURL(e.target.files[0]);
     //console.log("here is url", URL.createObjectURL(e.target.files[0]));
     imageToBase64(image.src);
+    //console.log("here is the  image", typeof e.target.files[0]);
+    const data = new FormData();
+    data.append("file", e.target.files[0]);
+    data.append("upload_preset", "talash");
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dztyioznk/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    const image_url = await res.json();
+    console.log(image_url.secure_url); //image_url
+    this.setState({
+      selectedFile: e.target.files[0],
+      image_url: image_url.secure_url,
+    });
+    // const file = new FileReader();
+    // file.addEventListener("load", () => {
+    //   localStorage.setItem("image", file.result);
+    // });
+    // file.readAsDataURL(e.target.files[0]);
+
+    // this.setState(
+    //   Object.assign(this.state.reportImage, JSON.parse(e.target.files[0]))
+    // );
   };
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -114,7 +128,7 @@ class CommonPortal extends Component {
     const reportdata = {
       age: this.state.age.trim(),
       name: this.state.name.trim(),
-      file: this.state.file.trim(),
+      file: this.state.image_url.trim(),
       time: this.state.time.trim(),
       address: this.state.address.trim(),
       phone: this.state.phone.trim(),
@@ -135,8 +149,7 @@ class CommonPortal extends Component {
 
     await axios
       .post(
-        `/api/report/?User_Email=${reportdata.User_Email}&&name=${reportdata.name}&&gender=${reportdata.gender}&&time=${reportdata.time}&&address=${reportdata.address}&&phone=${reportdata.phone}&&age=${reportdata.age}&&wear=${reportdata.wear}`,
-        filedata
+        `/api/report/?image=${reportdata.file}&&User_Email=${reportdata.User_Email}&&name=${reportdata.name}&&gender=${reportdata.gender}&&time=${reportdata.time}&&address=${reportdata.address}&&phone=${reportdata.phone}&&age=${reportdata.age}&&wear=${reportdata.wear}`
       )
       .then((res) => {
         let myColor = { background: "#0E1717", text: "#FFFFFF" };
@@ -161,7 +174,7 @@ class CommonPortal extends Component {
     const reportdata = {
       age: this.state.age.trim(),
       name: this.state.name.trim(),
-      file: this.state.file.trim(),
+      file: this.state.image_url.trim(),
       time: this.state.time.trim(),
       address: this.state.address.trim(),
       phone: this.state.phone.trim(),
@@ -206,15 +219,15 @@ class CommonPortal extends Component {
   //   });
   // };
   search = async () => {
-    const filedata = new FormData();
+    // const filedata = new FormData();
     this.setState({
       loading: true,
     });
     //console.log("this is imag ")
     //console.log(this.state.selectedFiles);
-    filedata.append("image", this.state.selectedFile);
+    // filedata.append("image", this.state.selectedFile);
     await axios
-      .post(`api/faceapi`, filedata)
+      .post(`api/faceapi?image=${this.state.image_url}`)
       //.then((respone) => respone.json())
       .then((Result) => {
         if (Result.data.message == "found") {

@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-route.post("/report", upload.single("image"), async (req, res) => {
+route.post("/report", async (req, res) => {
   const {
     name,
     age,
@@ -27,9 +27,11 @@ route.post("/report", upload.single("image"), async (req, res) => {
     gender,
     time,
     wear,
+    image,
     User_Email,
   } = req.query;
-  const url = "Reportpics/" + req.file.originalname;
+  //const url = "Reportpics/" + req.file.originalname;
+  const url = image;
   //const fileadd = "talash\\public\\Reportpics\\" + req.file.originalname;
   // const python = spawn("python", [
   //   "register.py",
@@ -56,7 +58,7 @@ route.post("/report", upload.single("image"), async (req, res) => {
   let report = {};
   report.name = name;
   report.age = age;
-  report.file = url;
+  report.file = image;
   report.gender = gender;
   report.address = address;
   report.time = time;

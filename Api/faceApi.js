@@ -19,16 +19,16 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-route.post("/faceapi", upload.single("image"), (req, res) => {
+route.post("/faceapi",  (req, res) => {
   var largeDataSet = [];
   var resultdata;
-  var Name,
-    Gender,
-    Age,
-    Time,
-    Address,
-    Wear,
-    Phone = "";
+  // var Name,
+  //   Gender,
+  //   Age,
+  //   Time,
+  //   Address,
+  //   Wear,
+  //   Phone = "";
   const url = "talash\\public\\upload\\" + req.file.originalname;
   // spawn new child process to call the python script
   //clientTalaash\public\upload

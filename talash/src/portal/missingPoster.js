@@ -3,12 +3,12 @@ import React, { Component } from "react";
 class MissingPoster extends Component {
   state = { reportData: [], num: 0 };
   componentWillMount() {
-    document.addEventListener("DOMContentLoaded", () => {
-      var images = localStorage.getItem("image");
-      if (images) {
-        document.getElementById("pic").setAttribute("src", images);
-      }
-    });
+    // document.addEventListener("DOMContentLoaded", () => {
+    //   var images = localStorage.getItem("image");
+    //   if (images) {
+    //     document.getElementById("pic").setAttribute("src", images);
+    //   }
+    // });
   
     var data = localStorage.getItem("Report");
     var data2 = JSON.parse(data);
@@ -17,7 +17,7 @@ class MissingPoster extends Component {
       address: data2["address"],
       age: data2["age"],
       gender: data2["gender"],
-      image: data2["image"],
+      image: data2["file"],
       phone: data2["phone"],
       wear: data2["wear"],
       time: data2["time"],
@@ -55,7 +55,7 @@ class MissingPoster extends Component {
                   <img
                     class="card-img-top rounded mx-auto d-block"
                     id="pic"
-                    src=""
+                    src={data.image}
                     alt="Card image"
                     style={{ height: "37%", width: "40%" }}
                   />
