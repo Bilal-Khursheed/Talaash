@@ -11,8 +11,8 @@ import os
 
 
 inputfilepath = 'https://res.cloudinary.com/dztyioznk/image/upload/v1609969742/reportPics/c63dewtepxd4rfsogjuw.jpg'
-
-readimage = face_recognition.load_image_file(inputfilepath)
+response = urllib.request.urlopen(urinputfilepathl)
+readimage = face_recognition.load_image_file(response)
 unknown_Encodings = face_recognition.face_encodings(readimage)[0]
 
 with open("datafile.csv", "r") as csv_file:
