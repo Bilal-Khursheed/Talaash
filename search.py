@@ -11,7 +11,7 @@ import urllib.request
 
 
 inputfilepath = 'https://res.cloudinary.com/dztyioznk/image/upload/v1609969742/reportPics/c63dewtepxd4rfsogjuw.jpg'
-response = urllib.request.urlopen(urinputfilepathl)
+response = urllib.request.urlopen(inputfilepath)
 readimage = face_recognition.load_image_file(response)
 unknown_Encodings = face_recognition.face_encodings(readimage)[0]
 
