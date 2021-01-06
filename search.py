@@ -10,7 +10,7 @@ import os
 
 
 
-inputfilepath = 'TALAASH\\talash\\public\\upload\\sunaa.jpeg'
+inputfilepath = 'https://res.cloudinary.com/dztyioznk/image/upload/v1609969742/reportPics/c63dewtepxd4rfsogjuw.jpg'
 
 readimage = face_recognition.load_image_file(inputfilepath)
 unknown_Encodings = face_recognition.face_encodings(readimage)[0]
