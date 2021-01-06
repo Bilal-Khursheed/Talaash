@@ -9,18 +9,11 @@ import csv
 import os
 
 
-# if len(sys.argv<2):
-#     print("Not enough arguments")
-# else:
-#     inputfilepath = sys.argv[1] talash\public\upload\sunaa.jpeg
 
 inputfilepath = 'TALAASH\\talash\\public\\upload\\sunaa.jpeg'
-#inputfilepath = sys.argv[1]
-# print(inputfilepath)
+
 readimage = face_recognition.load_image_file(inputfilepath)
 unknown_Encodings = face_recognition.face_encodings(readimage)[0]
-# row_contents = [Name,person_type,Contact,Details,Encodings]
-# append_list_as_row('datafile.csv', row_contents)
 
 with open("datafile.csv", "r") as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
@@ -34,6 +27,4 @@ with open("datafile.csv", "r") as csv_file:
                   lines[3], ",", lines[4], ",", lines[5], ",", lines[6])
 
     os.remove(inputfilepath)
-    # else:
-    #   print("not found") Name, Gender, Age, Time, Address, Wear,Contact
-# >C:\Users\syeda\anaconda3\Scripts\activate
+
