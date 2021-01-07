@@ -19,9 +19,9 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-route.post("/faceapi",  (req, res) => {
+route.post("/faceapi", (req, res) => {
   var largeDataSet = [];
-  var resultdata;
+  var resultdata = {};
   // var Name,
   //   Gender,
   //   Age,
@@ -29,7 +29,7 @@ route.post("/faceapi",  (req, res) => {
   //   Address,
   //   Wear,
   //   Phone = "";
-  const url = req.query.image
+  const url = req.query.image;
   // spawn new child process to call the python script
   //clientTalaash\public\upload
   console.log(url);
@@ -57,7 +57,7 @@ route.post("/faceapi",  (req, res) => {
     //console.log("to test the type " +largeDataSet.join())
     const d = "here:is: the :data";
 
-    console.log("here is the data " + d.split(":")[1]);
+    console.log("here is the data ", lines[0]);
   });
   // in close event we are sure that stream is from child process is closed
   python.on("close", (code) => {

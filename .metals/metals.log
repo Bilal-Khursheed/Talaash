@@ -2,3 +2,5 @@
 2021.01.07 00:06:18 INFO  time: initialize in 2.19s
 2021.01.07 00:06:25 WARN  Build server is not auto-connectable.
 2021.01.07 00:06:25 WARN  no build tool detected in workspace 'E:\TALAASH'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+Jan 07, 2021 7:10:05 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTraceNotification
