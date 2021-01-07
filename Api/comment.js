@@ -9,6 +9,7 @@ route.post("/addcomment", async (req, res) => {
     Name,
     ReportID,
     Comments,
+    file_url,
     
   } = req.body;
   console.log("all data " , Name, "" , ReportID, "" , Comments)
@@ -16,6 +17,7 @@ route.post("/addcomment", async (req, res) => {
   user.Name = Name;
   user.ReportID = ReportID;
   user.Comments = Comments;
+  user.file_url=file_url;
 
   let userModel = new comment(user);
   await userModel

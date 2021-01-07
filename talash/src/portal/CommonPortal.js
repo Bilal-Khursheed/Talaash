@@ -63,9 +63,27 @@ class CommonPortal extends Component {
       .then((res) => res.json())
       .then((Result) => {
         this.setState({ Comments: Result.data });
-        // console.log("thisis missing", this.state.Comments);
+        console.log("thisis missing", Result.data);
       });
   }
+  loadFile1 = async (e) => {
+    const data = new FormData();
+    data.append("file", e.target.files[0]);
+    data.append("upload_preset", "talash");
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dztyioznk/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    const image_url = await res.json();
+    console.log(image_url.secure_url); //image_url
+    this.setState({
+      image_url: image_url.secure_url,
+    });
+  };
 
   loadFile = async (e) => {
     var image = document.getElementById("output");
@@ -265,25 +283,46 @@ class CommonPortal extends Component {
         }
       });
   };
-  addcomment = (e) => {
+  addcomment = async (e) => {
     var ReportId = e.target.value;
     //console.log("here is the re id" + ReportId);
     var name = emailData.name();
     var comment = this.state.comment;
-    var users = {
-      Comments: comment,
-      ReportID: ReportId,
-      Name: name,
-    };
-    var user = this.state.Comments.concat(users);
-    this.setState({ Comments: user });
-    // console.log(users.Comments, "", users.Name);
-    // var Comments=this.state.data;
-    // var Name="Narmeen";
-    axios.post("api/addcomment", users).then((res) => {
-      //window.location.reload(true);
-      // console.log("comment added" + users.ReportID);
-    });
+    if (this.state.image_url === "") {
+      setTimeout(async () => {
+        var users = {
+          Comments: comment,
+          ReportID: ReportId,
+          Name: name,
+          file_url: this.state.image_url,
+        };
+        var user = this.state.Comments.concat(users);
+        this.setState({ Comments: user });
+        // console.log(users.Comments, "", users.Name);
+        // var Comments=this.state.data;
+        // var Name="Narmeen";
+        await axios.post("api/addcomment", users).then((res) => {
+          //window.location.reload(true);
+          // console.log("comment added" + users.ReportID);
+        });
+      }, 3000);
+    } else {
+      var users = {
+        Comments: comment,
+        ReportID: ReportId,
+        Name: name,
+        file_url: this.state.image_url,
+      };
+      var user = this.state.Comments.concat(users);
+      this.setState({ Comments: user });
+      // console.log(users.Comments, "", users.Name);
+      // var Comments=this.state.data;
+      // var Name="Narmeen";
+      await axios.post("api/addcomment", users).then((res) => {
+        //window.location.reload(true);
+        // console.log("comment added" + users.ReportID);
+      });
+    }
   };
   Deletepost = async (e) => {
     var ReportId = e.target.value;
@@ -857,6 +896,7 @@ class CommonPortal extends Component {
                                         >
                                           {comment.Name.toUpperCase()}:
                                         </label>
+
                                         <span
                                           className="card-text"
                                           id="comment"
@@ -865,6 +905,20 @@ class CommonPortal extends Component {
                                         </span>
 
                                         <br />
+
+                                        {comment.file_url && (
+                                          <div>
+                                            <img
+                                              style={{
+                                                width: "200px",
+                                                height: "200px",
+                                              }}
+                                              src={comment.file_url}
+                                              alt=""
+                                            ></img>
+                                            <br />
+                                          </div>
+                                        )}
                                       </div>
                                     )
                                 )}
@@ -881,7 +935,11 @@ class CommonPortal extends Component {
                                           type="text"
                                           placeholder="Write Comment"
                                           onChange={this.handleChange}
-                                        />
+                                        ></input>{" "}
+                                        <input
+                                          type="file"
+                                          onChange={this.loadFile1}
+                                        ></input>
                                       </div>
                                     </div>
                                     <button

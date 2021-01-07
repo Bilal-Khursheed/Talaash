@@ -9,7 +9,7 @@ class MissingPoster extends Component {
     //     document.getElementById("pic").setAttribute("src", images);
     //   }
     // });
-  
+
     var data = localStorage.getItem("Report");
     var data2 = JSON.parse(data);
     var report = {
@@ -25,7 +25,6 @@ class MissingPoster extends Component {
     var joined = this.state.reportData.concat(report);
     this.setState({ reportData: joined });
     this.setState({ num: +1 });
-
   }
 
   render() {

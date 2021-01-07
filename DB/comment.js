@@ -13,9 +13,9 @@ const comment = new mongoose.Schema({
     type: String,
     required: true,
   },
-
+  file_url: {
+    type: String,
+  },
 });
 
 module.exports = Comment = mongoose.model("comment", comment);
-
-
