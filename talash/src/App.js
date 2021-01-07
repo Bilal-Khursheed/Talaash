@@ -12,7 +12,7 @@ import SearchByImage from "./userportal/SearchByImage";
 import myposts from "./userportal/myposts";
 import Header from "./Website/Header";
 import About from "./mainSite/about";
-import Team from "./mainSite/teams";
+// import Team from "./mainSite/teams";
 import Services from "./mainSite/services";
 import ContactUs from "./mainSite/contactUs";
 import ViewPostH from "./hospitalportal/ViewPostH";
@@ -76,7 +76,7 @@ function App() {
             ></ProtectedRoute3>
             {/* end of user portal */}
             <Route path="/about" component={About}></Route>
-            <Route path="/team" component={Team}></Route>
+            {/* <Route path="/team" component={Team}></Route> */}
             <Route path="/services" component={Services}></Route>
             <Route path="/contact" component={ContactUs}></Route>
             <Route path="/Demo" component={Demo}></Route>
