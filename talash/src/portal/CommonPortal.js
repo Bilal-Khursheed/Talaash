@@ -6,7 +6,8 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import ImgToBase64 from "image-to-base64";
 import LoadingOverlay from "react-loading-overlay";
-import ScaleLoader from "react-spinners/ScaleLoader";
+import ScaleLoader from "react-spinners/ScaleLoader"; //BarLoader
+import BarLoader from "react-spinners/BarLoader";
 import Setting from "./setting";
 import Notifications, { notify } from "react-notify-toast";
 class CommonPortal extends Component {
@@ -30,6 +31,8 @@ class CommonPortal extends Component {
     comment: "",
     image_url: "",
     navigate: false,
+    uploaded: false,
+    isimage: false,
   };
 
   async componentWillMount() {
@@ -67,6 +70,11 @@ class CommonPortal extends Component {
       });
   }
   loadFile1 = async (e) => {
+    this.setState({
+      isimage: true,
+      loading: true,
+    });
+
     const data = new FormData();
     data.append("file", e.target.files[0]);
     data.append("upload_preset", "talash");
@@ -82,10 +90,15 @@ class CommonPortal extends Component {
     console.log(image_url.secure_url); //image_url
     this.setState({
       image_url: image_url.secure_url,
+      uploaded: true,
+      loading: false,
     });
   };
 
   loadFile = async (e) => {
+    this.setState({
+      isimage: true,
+    });
     var image = document.getElementById("output");
     const imageToBase64 = ImgToBase64;
     image.src = URL.createObjectURL(e.target.files[0]);
@@ -107,6 +120,7 @@ class CommonPortal extends Component {
     console.log(image_url.secure_url); //image_url
     this.setState({
       selectedFile: e.target.files[0],
+      uploaded: true,
       image_url: image_url.secure_url,
     });
     // const file = new FileReader();
@@ -936,6 +950,19 @@ class CommonPortal extends Component {
                                           placeholder="Write Comment"
                                           onChange={this.handleChange}
                                         ></input>{" "}
+                                        {
+                                          <LoadingOverlay
+                                            active={this.state.loading}
+                                            spinner={
+                                              <BarLoader
+                                                color={"#000000"}
+                                                height={50}
+                                                width={4}
+                                              />
+                                            }
+                                            text="uploading image..."
+                                          ></LoadingOverlay>
+                                        }
                                         <input
                                           type="file"
                                           onChange={this.loadFile1}
