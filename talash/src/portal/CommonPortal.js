@@ -7,7 +7,7 @@ import html2canvas from "html2canvas";
 import ImgToBase64 from "image-to-base64";
 import LoadingOverlay from "react-loading-overlay";
 import ScaleLoader from "react-spinners/ScaleLoader"; //BarLoader
-import BarLoader from "react-spinners/BarLoader";
+import BounceLoader from "react-spinners/BounceLoader";
 import Setting from "./setting";
 import Notifications, { notify } from "react-notify-toast";
 class CommonPortal extends Component {
@@ -31,8 +31,8 @@ class CommonPortal extends Component {
     comment: "",
     image_url: "",
     navigate: false,
-    uploaded: false,
-    isimage: false,
+
+    loadingImg: false,
   };
 
   async componentWillMount() {
@@ -98,12 +98,9 @@ class CommonPortal extends Component {
   loadFile = async (e) => {
     this.setState({
       isimage: true,
+      loadingImg: true,
     });
-    var image = document.getElementById("output");
-    const imageToBase64 = ImgToBase64;
-    image.src = URL.createObjectURL(e.target.files[0]);
-    //console.log("here is url", URL.createObjectURL(e.target.files[0]));
-    imageToBase64(image.src);
+
     //console.log("here is the  image", typeof e.target.files[0]);
     const data = new FormData();
     data.append("file", e.target.files[0]);
@@ -121,8 +118,14 @@ class CommonPortal extends Component {
     this.setState({
       selectedFile: e.target.files[0],
       uploaded: true,
+      loadingImg: false,
       image_url: image_url.secure_url,
     });
+    var image = document.getElementById("output");
+    const imageToBase64 = ImgToBase64;
+    image.src = URL.createObjectURL(e.target.files[0]);
+    //console.log("here is url", URL.createObjectURL(e.target.files[0]));
+    imageToBase64(image.src);
     // const file = new FileReader();
     // file.addEventListener("load", () => {
     //   localStorage.setItem("image", file.result);
@@ -302,41 +305,22 @@ class CommonPortal extends Component {
     //console.log("here is the re id" + ReportId);
     var name = emailData.name();
     var comment = this.state.comment;
-    if (this.state.image_url === "") {
-      setTimeout(async () => {
-        var users = {
-          Comments: comment,
-          ReportID: ReportId,
-          Name: name,
-          file_url: this.state.image_url,
-        };
-        var user = this.state.Comments.concat(users);
-        this.setState({ Comments: user });
-        // console.log(users.Comments, "", users.Name);
-        // var Comments=this.state.data;
-        // var Name="Narmeen";
-        await axios.post("api/addcomment", users).then((res) => {
-          //window.location.reload(true);
-          // console.log("comment added" + users.ReportID);
-        });
-      }, 3000);
-    } else {
-      var users = {
-        Comments: comment,
-        ReportID: ReportId,
-        Name: name,
-        file_url: this.state.image_url,
-      };
-      var user = this.state.Comments.concat(users);
-      this.setState({ Comments: user });
-      // console.log(users.Comments, "", users.Name);
-      // var Comments=this.state.data;
-      // var Name="Narmeen";
-      await axios.post("api/addcomment", users).then((res) => {
-        //window.location.reload(true);
-        // console.log("comment added" + users.ReportID);
-      });
-    }
+
+    var users = {
+      Comments: comment,
+      ReportID: ReportId,
+      Name: name,
+      file_url: this.state.image_url,
+    };
+    var user = this.state.Comments.concat(users);
+    this.setState({ Comments: user });
+    // console.log(users.Comments, "", users.Name);
+    // var Comments=this.state.data;
+    // var Name="Narmeen";
+    await axios.post("api/addcomment", users).then((res) => {
+      //window.location.reload(true);
+      // console.log("comment added" + users.ReportID);
+    });
   };
   Deletepost = async (e) => {
     var ReportId = e.target.value;
@@ -344,6 +328,11 @@ class CommonPortal extends Component {
       .then((respone) => respone.json())
       .then((res) => {
         if (res.message == "Deleted") {
+          this.setState((prevState) => ({
+            Myposts: prevState.Myposts.filter(
+              (Myposts) => Myposts._id !== e.target.value
+            ),
+          }));
           // window.location.reload();
           // alert("Deleted");
         } else {
@@ -733,6 +722,18 @@ class CommonPortal extends Component {
                                     backgroundColor: "white",
                                   }}
                                 />
+                                {
+                                  <LoadingOverlay
+                                    active={this.state.loadingImg}
+                                    spinner={
+                                      <BounceLoader
+                                        color={"#000000"}
+                                        size={70}
+                                      />
+                                    }
+                                    text="Uploading image..."
+                                  ></LoadingOverlay>
+                                }
                                 <div class="">
                                   <input
                                     class="form-control"
@@ -942,6 +943,18 @@ class CommonPortal extends Component {
                                   <div>
                                     <div class="form-group ">
                                       <div class="col-md-12">
+                                        {
+                                          <LoadingOverlay
+                                            active={this.state.loading}
+                                            spinner={
+                                              <BounceLoader
+                                                color={"#000000"}
+                                                size={70}
+                                              />
+                                            }
+                                            text="Uploading image..."
+                                          ></LoadingOverlay>
+                                        }
                                         <input
                                           class=" form-control"
                                           id="address"
@@ -950,19 +963,6 @@ class CommonPortal extends Component {
                                           placeholder="Write Comment"
                                           onChange={this.handleChange}
                                         ></input>{" "}
-                                        {
-                                          <LoadingOverlay
-                                            active={this.state.loading}
-                                            spinner={
-                                              <BarLoader
-                                                color={"#000000"}
-                                                height={50}
-                                                width={4}
-                                              />
-                                            }
-                                            text="uploading image..."
-                                          ></LoadingOverlay>
-                                        }
                                         <input
                                           type="file"
                                           onChange={this.loadFile1}
