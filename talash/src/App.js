@@ -39,20 +39,48 @@ function App() {
     <div>
       <Router>
         <Switch>
-          <Route path="/poster" component={MissingPoster}></Route>
-          <Header>
-            <Route exact path="/" component={website}></Route>
-            <Route path="/login" component={Login}></Route>
-            <Route path="/signup" component={Signup}></Route>
-            <Route path="/hosignup" component={hospitalSignup}></Route>
-            <Route path="/Policesignup" component={PoliceSignup}></Route>
-            <Route path="/orgsignup" component={OrgSignup}></Route>
-
-            <Route path="/setting" component={Setting}></Route>
-            <Route path="/settingH" component={SettingH}></Route>
-            <Route path="/settingO" component={SettingO}></Route>
-            <Route path="/settingU" component={SettingU}></Route>
-
+          {/* hospital portal */}
+          <ProtectedRoute
+            path="/hopitalPortal"
+            component={ViewPostH}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            path="/SearchByImageh"
+            component={SearchByImageh}
+          ></ProtectedRoute>
+          <ProtectedRoute
+            path="/contactfamilyH"
+            component={ContactFamilyH}
+          ></ProtectedRoute>
+          {/* end of hospital portal */}
+          {/* Police portal */}
+          <ProtectedRoute2
+            path="/PolicePortal"
+            component={ViewPostP}
+          ></ProtectedRoute2>
+          <ProtectedRoute2
+            path="/SearchByImageP"
+            component={SearchByImageP}
+          ></ProtectedRoute2>
+          <ProtectedRoute2
+            path="/contactfamily"
+            component={ContactFamily}
+          ></ProtectedRoute2>
+          {/* end of Police portal */}
+          {/* Org portal */}
+          <ProtectedRoute1
+            path="/OrgPortal"
+            component={ViewPostOrg}
+          ></ProtectedRoute1>
+          <ProtectedRoute1
+            path="/SearchByImageOrg"
+            component={SearchByImageOrg}
+          ></ProtectedRoute1>
+          <ProtectedRoute1
+            path="/contactfamilyO"
+            component={ContactFamilyO}
+          ></ProtectedRoute1>
+          {/* end of Org portal */}
             {/* User Portal */}
             <ProtectedRoute3
               path="/viewpost"
@@ -75,6 +103,22 @@ function App() {
               component={ContactFamilyU}
             ></ProtectedRoute3>
             {/* end of user portal */}
+
+          <Route path="/poster" component={MissingPoster}></Route>
+          <Header>
+            <Route exact path="/" component={website}></Route>
+            <Route path="/login" component={Login}></Route>
+            <Route path="/signup" component={Signup}></Route>
+            <Route path="/hosignup" component={hospitalSignup}></Route>
+            <Route path="/Policesignup" component={PoliceSignup}></Route>
+            <Route path="/orgsignup" component={OrgSignup}></Route>
+
+            <Route path="/setting" component={Setting}></Route>
+            <Route path="/settingH" component={SettingH}></Route>
+            <Route path="/settingO" component={SettingO}></Route>
+            <Route path="/settingU" component={SettingU}></Route>
+
+          
             <Route path="/about" component={About}></Route>
             {/* <Route path="/team" component={Team}></Route> */}
             <Route path="/services" component={Services}></Route>
@@ -82,48 +126,6 @@ function App() {
             <Route path="/Demo" component={Demo}></Route>
 
             <Route path="/opt" component={signupOption}></Route>
-            {/* hospital portal */}
-            <ProtectedRoute
-              path="/hopitalPortal"
-              component={ViewPostH}
-            ></ProtectedRoute>
-            <ProtectedRoute
-              path="/SearchByImageh"
-              component={SearchByImageh}
-            ></ProtectedRoute>
-            <ProtectedRoute
-              path="/contactfamilyH"
-              component={ContactFamilyH}
-            ></ProtectedRoute>
-            {/* end of hospital portal */}
-            {/* Police portal */}
-            <ProtectedRoute2
-              path="/PolicePortal"
-              component={ViewPostP}
-            ></ProtectedRoute2>
-            <ProtectedRoute2
-              path="/SearchByImageP"
-              component={SearchByImageP}
-            ></ProtectedRoute2>
-            <ProtectedRoute2
-              path="/contactfamily"
-              component={ContactFamily}
-            ></ProtectedRoute2>
-            {/* end of Police portal */}
-            {/* Org portal */}
-            <ProtectedRoute1
-              path="/OrgPortal"
-              component={ViewPostOrg}
-            ></ProtectedRoute1>
-            <ProtectedRoute1
-              path="/SearchByImageOrg"
-              component={SearchByImageOrg}
-            ></ProtectedRoute1>
-            <ProtectedRoute1
-              path="/contactfamilyO"
-              component={ContactFamilyO}
-            ></ProtectedRoute1>
-            {/* end of Org portal */}
           </Header>
         </Switch>
       </Router>

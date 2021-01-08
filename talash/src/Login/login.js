@@ -69,6 +69,7 @@ class Login extends Component {
         }
       })
       .catch((err) => {
+        console.log("error");
         console.log(e);
         // let myColor = { background: "#0E1717", text: "#FFFFFF" };
         // notify.show(

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import emailData from "../common/getData";
 import axios from "axios";
+
 import ImgToBase64 from "image-to-base64";
 import LoadingOverlay from "react-loading-overlay";
 import ScaleLoader from "react-spinners/ScaleLoader"; //BarLoader
@@ -155,6 +156,7 @@ class CommonPortal extends Component {
   };
   printDocument = (e) => {
     e.preventDefault();
+    // console.log("Working in it");
     const reportdata = {
       age: this.state.age.trim(),
       name: this.state.name.trim(),
@@ -175,6 +177,7 @@ class CommonPortal extends Component {
     this.setState({
       loading: true,
     });
+
     await axios
       .post(`api/faceapi?image=${this.state.image_url}`)
       .then((Result) => {
@@ -220,6 +223,7 @@ class CommonPortal extends Component {
     };
     var user = this.state.Comments.concat(users);
     this.setState({ Comments: user });
+
     await axios.post("api/addcomment", users).then((res) => {});
   };
   Deletepost = async (e) => {
@@ -267,11 +271,15 @@ class CommonPortal extends Component {
             </div>
 
             {/* <!--logo start--> */}
-            <Link to="" class="logo">
+            <Link class="logo">
               {" "}
               <span class="lite">{this.props.portalName}</span>
             </Link>
             {/* <!--logo end--> */}
+
+            <div class="nav search-row" id="top_menu">
+              {/* <!--  search form end --> */}
+            </div>
 
             <div class="top-nav notification-row">
               {/* <!-- notificatoin dropdown start-->/ */}
