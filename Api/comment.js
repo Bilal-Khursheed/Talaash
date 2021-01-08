@@ -24,7 +24,6 @@ route.post("/addcomment", async (req, res) => {
     .save()
     .then((userModel) => res.json(userModel))
     .catch((err) => console.log(err));
-  //res.json(userModel);
 });
 route.get("/allcommet", async (req, res) => {
   await comment.find()
@@ -32,10 +31,6 @@ route.get("/allcommet", async (req, res) => {
       return res.json({ status: true, message: "user found", data: user });
     })
     .catch((err) => console.log("yahan a raha haaaaa" + err));
-  // console.log("Found data");
-
-  // res.json(userModel);
 });
-// console.log("Found data");
 
 module.exports = route;

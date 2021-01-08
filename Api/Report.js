@@ -1,23 +1,9 @@
 const { Router } = require("express");
 const express = require("express");
 const mongoose = require("mongoose");
-var multer = require("multer");
 var path = require("path");
 const Report = require("../DB/Report");
 const route = express.Router();
-const { spawn } = require("child_process");
-//route.use(express.static(__dirname + "../talash/public/"));
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./talash/public/Reportpics");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
-});
-
-const upload = multer({ storage: storage });
 route.post("/report", async (req, res) => {
   const {
     name,
@@ -30,9 +16,7 @@ route.post("/report", async (req, res) => {
     image,
     User_Email,
   } = req.query;
-  //const url = "Reportpics/" + req.file.originalname;
   const url = image;
-  // const fileadd = "talash\\public\\Reportpics\\" + req.file.originalname;
   const fileadd = image;
   const python = spawn("python", [
     "register.py",
@@ -47,14 +31,10 @@ route.post("/report", async (req, res) => {
   ]);
   python.stdout.on("data", function (data) {
     console.log("Pipe data from python script ...");
-    //largeDataSet.push(data);Name, Gender, Age, Time, Address, Wear,Contact
   });
-  // in close event we are sure that stream is from child process is closed
   python.on("close", (code) => {
     console.log(`child process close all stdio with code ${code}`);
   });
-  // send data to browser
-
   console.log("here is the user email", User_Email);
   let report = {};
   report.name = name;
@@ -72,12 +52,10 @@ route.post("/report", async (req, res) => {
     .save()
     .then((reportModel) => res.json(reportModel))
     .catch((err) => console.log(err));
-  //res.json(userModel);
 });
 
 route.get("/getreport/", async (req, res) => {
   var User_Email = req.query.User_Email;
-  //var User_Email="syedan1405@gmail.com";
   console.log("here is the email", User_Email);
   await Report.find({ User_Email })
 
@@ -85,18 +63,13 @@ route.get("/getreport/", async (req, res) => {
       return res.json({ status: true, message: "data found", data: report });
     })
     .catch((err) => console.log("yahan a raha haaaaa" + err));
-  // console.log("Found data");
 });
 route.get("/allreport/", async (req, res) => {
-  //var User_Email=req.query.User_Email;
-  //var User_Email="syedan1405@gmail.com";
-  //console.log("here is the email" , User_Email)
   await Report.find()
     .then((report) => {
       return res.json({ status: true, message: "data found", data: report });
     })
     .catch((err) => console.log("yahan a raha haaaaa" + err));
-  // console.log("Found data");
 });
 route.get("/delete/", async (req, res) => {
   var Id = req.query.id;
@@ -109,31 +82,6 @@ route.get("/delete/", async (req, res) => {
       res.json({ status: true, message: "Deleted" });
     }
   });
-  // console.log("Found data");
-});
-route.put("/comment/", (req, res) => {
-  const comment = {
-    text: req.body.text,
-    postedBy: req.user._id,
-  };
-  Post.findByIdAndUpdate(
-    req.body.postId,
-    {
-      $push: { comments: comment },
-    },
-    {
-      new: true,
-    }
-  )
-    .populate("comments.postedBy", "_id name")
-    .populate("postedBy", "_id name")
-    .exec((err, result) => {
-      if (err) {
-        return res.status(422).json({ error: err });
-      } else {
-        res.json(result);
-      }
-    });
 });
 
 module.exports = route;

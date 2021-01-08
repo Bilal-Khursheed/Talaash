@@ -6,8 +6,8 @@ class Options extends Component {
   state = {};
   render() {
     return (
-      <div>
-        <div class="container h-100">
+      <div className="">
+        <div class="container h-100 mx-4">
           <div class="row align-middle">
             <div class="col-md-6 col-lg-4 column">
               <Link to="orgsignup">
@@ -27,7 +27,7 @@ class Options extends Component {
                     <a>more</a>
                   </strong>
                   <div class="ico-card">
-                  <i class="ri-hand-heart-line"></i>
+                    <i class="ri-hand-heart-line"></i>
                   </div>
                 </div>
               </Link>
@@ -50,7 +50,7 @@ class Options extends Component {
                     <a href="#">more</a>
                   </strong>
                   <div class="ico-card">
-                  <i class="ri-police-car-fill"></i>
+                    <i class="ri-police-car-fill"></i>
                   </div>
                 </div>
               </Link>
@@ -62,7 +62,6 @@ class Options extends Component {
                     <h1>
                       <strong>
                         SIGNUP <br></br> AS HOSPITAL
-                        
                       </strong>
                     </h1>
 

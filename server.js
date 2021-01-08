@@ -9,7 +9,6 @@ app.use("/api", require("./Api/Report"));
 app.use("/api", require("./Api/Hospital"));
 app.use("/api", require("./Api/Police"));
 app.use("/api", require("./Api/Organization"));
-app.use("/api", require("./Api/Trustee"));
 app.use("/api", require("./Api/faceApi"));
 app.use("/api", require("./Api/comment"));
 

@@ -25,7 +25,6 @@ route.post("/organization", async (req, res) => {
     .save()
     .then((organizationModel) => res.json(organizationModel))
     .catch((err) => console.log(err));
-  //res.json(userModel);
 });
 route.post("/orglogin", async (req, res) => {
   const { email, password } = req.body;
@@ -40,8 +39,6 @@ route.post("/orglogin", async (req, res) => {
       return res.json({ status: false, message: "user found" });
     })
     .catch((err) => console.log("yahan a raha haaaaa" + err));
-  // console.log("Found data");
-
-  // res.json(userModel);
+  
 });
 module.exports = route;

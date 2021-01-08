@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Oct 9 00:30:32 2020
 
-
-"""
 import numpy as np
 import face_recognition
 import sys
@@ -28,14 +23,7 @@ Time = sys.argv[5]
 Address = sys.argv[6]
 Wear = sys.argv[7]
 Phone = sys.argv[8]
-# inputfilepath = "https://res.cloudinary.com/dztyioznk/image/upload/v1609965455/reportPics/ivcorepehstercg8uqtt.png"; 
-# Name = "Bilal"
-# Gender = "Male"
-# Age = "22"
-# Time = "22/2020"
-# Address = "Mirpur Ajk"
-# Wear = "Black Shirt with white pent"
-# Phone = "03435527709"
+
 response = urllib.request.urlopen(inputfilepath)
 readimage = face_recognition.load_image_file(response)
 Encodings = face_recognition.face_encodings(readimage)[0]

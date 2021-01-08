@@ -29,29 +29,9 @@ route.post("/police", async (req, res) => {
     .save()
     .then((policeModel) => res.json(policeModel))
     .catch((err) => console.log(err));
-  //res.json(userModel);
-});/*
-route.post("/Login", async (req, res) => {
-  const { email, password } = req.body;
-
-  await Police.findOne({ email })
-    .then((police) => {
-      if (password == police.password)
-        if (email == police.email) {
-          console.log("password and email match");
-        } else console.log("Found data");
-      return res.json({ status: true, message: "user found" });
-    })
-    .catch((err) => console.log("yahan a raha haaaaa" + err));
-  // console.log("Found data");
-
-  // res.json(userModel);
-});*/
+});
 
 route.get("/Login", async (req, res) => {
-  //const email = "1";
-   //const password = "1";
-  //const { email, password } = req.body;
   const { email, password } = req.query;
   console.log("email : ", email);
   console.log("pass : ", password);

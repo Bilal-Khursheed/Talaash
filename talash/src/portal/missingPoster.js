@@ -29,7 +29,6 @@ class MissingPoster extends Component {
 
   render() {
     if (this.state.num === 1) {
-      //setTimeout(() => window.location.reload(), 3000);
     }
 
     console.log(this.state.reportData);
@@ -68,10 +67,7 @@ class MissingPoster extends Component {
                     <p class="card-text">
                       <b>Age: </b> {data.age}
                     </p>
-                    {/* <p class="card-text">
-                      <b>Phone: </b>
-                      {data.phone}
-                    </p> */}
+                    
                     <p class="card-text">
                       <b>Gender: </b>
                       {data.gender}

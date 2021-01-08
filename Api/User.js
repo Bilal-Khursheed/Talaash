@@ -30,7 +30,6 @@ route.post("/", async (req, res) => {
     .save()
     .then((userModel) => res.json({ message: "Added", data: userModel }))
     .catch((err) => console.log(err));
-  //res.json(userModel);
 });
 route.post("/Login", async (req, res) => {
   const { email, password } = req.body;
@@ -44,15 +43,10 @@ route.post("/Login", async (req, res) => {
       return res.json({ status: true, message: "user found" });
     })
     .catch((err) => console.log("yahan a raha haaaaa" + err));
-  // console.log("Found data");
-
-  // res.json(userModel);
 });
 route.get("/update/", async (req, res) => {
-  //var Id = req.query.id;
   var email = req.query.email;
   var newpassword = req.query.newpassword;
-  //console.log("id" + Id);
   console.log("email" + email);
 
   const user = await User.findOne({ email });
@@ -171,6 +165,5 @@ route.get("/update/", async (req, res) => {
     }
   }
 });
-// console.log("Found data");
 
 module.exports = route;
