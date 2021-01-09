@@ -136,7 +136,6 @@ class CommonPortal extends Component {
       wear: this.state.wear.trim(),
       User_Email: userEmail,
     };
-
     await axios
       .post(
         `/api/report/?image=${reportdata.file}&&User_Email=${reportdata.User_Email}&&name=${reportdata.name}&&gender=${reportdata.gender}&&time=${reportdata.time}&&address=${reportdata.address}&&phone=${reportdata.phone}&&age=${reportdata.age}&&wear=${reportdata.wear}`
@@ -156,7 +155,6 @@ class CommonPortal extends Component {
   };
   printDocument = (e) => {
     e.preventDefault();
-    // console.log("Working in it");
     const reportdata = {
       age: this.state.age.trim(),
       name: this.state.name.trim(),

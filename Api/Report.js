@@ -54,7 +54,18 @@ route.post("/report", async (req, res) => {
     .then((reportModel) => res.json(reportModel))
     .catch((err) => console.log(err));
 });
+//getreportbyName
+route.get("/getreportbyName/", async (req, res) => {
+  var name = req.query.Name;
+  console.log("here is the email", name);
+  await Report.find({ name })
 
+    .then((report) => {
+      //console.log(report);
+      return res.json({ status: true, message: "data found", data: report });
+    })
+    .catch((err) => console.log("yahan a raha haaaaa" + err));
+});
 route.get("/getreport/", async (req, res) => {
   var User_Email = req.query.User_Email;
   console.log("here is the email", User_Email);

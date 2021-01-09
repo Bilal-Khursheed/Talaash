@@ -2,17 +2,15 @@
   "name": "talash",
   "version": "0.1.0",
   "private": true,
-  "proxy" : "http://localhost:3001/",
-    "dependencies": {
+  "proxy": "http://localhost:3001/",
+  "dependencies": {
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
     "axios": "^0.21.1",
     "glyphicons": "^0.2.0",
-    
     "image-to-base64": "^2.1.1",
     "jquery": "^3.5.1",
-    
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-loading-overlay": "^1.0.1",

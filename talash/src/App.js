@@ -34,6 +34,7 @@ import SettingU from "./userportal/setting"; //ContactFamilyU
 import ContactFamilyU from "./userportal/contactfamily";
 import ContactFamilyH from "./hospitalportal/contactFamily";
 import ContactFamilyO from "./OrgPortal/contactFamily";
+import SearchReport from "./mainSite/searchReport";
 function App() {
   return (
     <div>
@@ -81,28 +82,28 @@ function App() {
             component={ContactFamilyO}
           ></ProtectedRoute1>
           {/* end of Org portal */}
-            {/* User Portal */}
-            <ProtectedRoute3
-              path="/viewpost"
-              component={ViewPost}
-            ></ProtectedRoute3>
-            <ProtectedRoute3
-              path="/filereport"
-              component={FileReport}
-            ></ProtectedRoute3>
-            <ProtectedRoute3
-              path="/searchbyimg"
-              component={SearchByImage}
-            ></ProtectedRoute3>
-            <ProtectedRoute3
-              path="/myposts"
-              component={myposts}
-            ></ProtectedRoute3>
-            <ProtectedRoute3
-              path="/contactfamilyU"
-              component={ContactFamilyU}
-            ></ProtectedRoute3>
-            {/* end of user portal */}
+          {/* User Portal */}
+          <ProtectedRoute3
+            path="/viewpost"
+            component={ViewPost}
+          ></ProtectedRoute3>
+          <ProtectedRoute3
+            path="/filereport"
+            component={FileReport}
+          ></ProtectedRoute3>
+          <ProtectedRoute3
+            path="/searchbyimg"
+            component={SearchByImage}
+          ></ProtectedRoute3>
+          <ProtectedRoute3
+            path="/myposts"
+            component={myposts}
+          ></ProtectedRoute3>
+          <ProtectedRoute3
+            path="/contactfamilyU"
+            component={ContactFamilyU}
+          ></ProtectedRoute3>
+          {/* end of user portal */}
 
           <Route path="/poster" component={MissingPoster}></Route>
           <Header>
@@ -118,7 +119,6 @@ function App() {
             <Route path="/settingO" component={SettingO}></Route>
             <Route path="/settingU" component={SettingU}></Route>
 
-          
             <Route path="/about" component={About}></Route>
             {/* <Route path="/team" component={Team}></Route> */}
             <Route path="/services" component={Services}></Route>
@@ -126,6 +126,7 @@ function App() {
             <Route path="/Demo" component={Demo}></Route>
 
             <Route path="/opt" component={signupOption}></Route>
+            <Route path="/SearchR" component={SearchReport}></Route>
           </Header>
         </Switch>
       </Router>

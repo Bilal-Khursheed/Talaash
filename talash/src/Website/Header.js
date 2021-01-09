@@ -52,6 +52,11 @@ class Header extends Component {
                     </Link>
                   </li>
                   <li class="nav-item">
+                    <Link to="SearchR">
+                      <a class="nav-link">SearchReport</a>
+                    </Link>
+                  </li>
+                  <li class="nav-item">
                     <Link to="Demo">
                       {" "}
                       <a class="nav-link">Demo</a>
