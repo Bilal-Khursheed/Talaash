@@ -28,6 +28,7 @@ route.post("/faceapi", (req, res) => {
       };
     }
     largeDataSet.push(data);
+    console.log("count ", count);
   });
   python.on("close", (code) => {
     console.log(`child process close all stdio with code ${code}`);

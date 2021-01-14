@@ -179,6 +179,7 @@ class CommonPortal extends Component {
     await axios
       .post(`api/faceapi?image=${this.state.image_url}`)
       .then((Result) => {
+        console.log("Result is ", Result.data.found);
         if (Result.data.found == 1) {
           alert("Not Found");
         }
