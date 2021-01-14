@@ -179,12 +179,15 @@ class CommonPortal extends Component {
     await axios
       .post(`api/faceapi?image=${this.state.image_url}`)
       .then((Result) => {
-        console.log("Result is ", Result.data.message);
+        // console.log("Result is ", Result.data.message);
         if (Result.data.message == "notfound") {
+          this.setState({
+            loading: false,
+          });
           let myColor = { background: "#0E1717", text: "#FFFFFF" };
           notify.show(
-            <div style={{ fontSize: 30 }}>"Not Found"</div>,
-            "Not fOUND",
+            <div style={{ fontSize: 30 }}>Not Found</div>,
+            "error",
             10000,
             myColor
           );
@@ -198,12 +201,15 @@ class CommonPortal extends Component {
             Wear: Result.data.info.Wear,
             Phone: Result.data.info.Phone,
           };
-          console.log("Name  is empty or not", total.Name);
-          if (total.Name == undefined) {
+          // console.log("Name  is empty or not", total.Name);
+          if (total.Name == null) {
+            this.setState({
+              loading: false,
+            });
             let myColor = { background: "#0E1717", text: "#FFFFFF" };
             notify.show(
-              <div style={{ fontSize: 30 }}>"Not Found"</div>,
-              "Not fOUND",
+              <div style={{ fontSize: 30 }}>Not Found</div>,
+              "error",
               10000,
               myColor
             );
@@ -220,7 +226,7 @@ class CommonPortal extends Component {
           });
           let myColor = { background: "#0E1717", text: "#FFFFFF" };
           notify.show(
-            <div style={{ fontSize: 30 }}>"Not Found"</div>,
+            <div style={{ fontSize: 30 }}>Not Found</div>,
             "error",
             10000,
             myColor
