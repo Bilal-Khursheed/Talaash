@@ -179,11 +179,16 @@ class CommonPortal extends Component {
     await axios
       .post(`api/faceapi?image=${this.state.image_url}`)
       .then((Result) => {
-        console.log("Result is ", Result.data.found);
-        if (Result.data.found == 1) {
-          alert("Not Found");
-        }
-        if (Result.data.message == "found") {
+        console.log("Result is ", Result.data.message);
+        if (Result.data.message == "notfound") {
+          let myColor = { background: "#0E1717", text: "#FFFFFF" };
+          notify.show(
+            <div style={{ fontSize: 30 }}>"Not Found"</div>,
+            "Not fOUND",
+            10000,
+            myColor
+          );
+        } else if (Result.data.message == "found") {
           var total = {
             Name: Result.data.info.Name,
             Gender: Result.data.info.Gender,
@@ -193,6 +198,7 @@ class CommonPortal extends Component {
             Wear: Result.data.info.Wear,
             Phone: Result.data.info.Phone,
           };
+          console.log("Name  is empty or not", total.Name);
           if (total.Name == "") {
             let myColor = { background: "#0E1717", text: "#FFFFFF" };
             notify.show(
