@@ -199,7 +199,7 @@ class CommonPortal extends Component {
             Phone: Result.data.info.Phone,
           };
           console.log("Name  is empty or not", total.Name);
-          if (total.Name == "") {
+          if (total.Name == undefined) {
             let myColor = { background: "#0E1717", text: "#FFFFFF" };
             notify.show(
               <div style={{ fontSize: 30 }}>"Not Found"</div>,
