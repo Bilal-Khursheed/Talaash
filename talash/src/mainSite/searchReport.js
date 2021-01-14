@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Footer from "../Website/Footer";
+import Notifications, { notify } from "react-notify-toast";
 class SearchReport extends Component {
   state = { Myposts: [], Name: "" };
   searchReport = async () => {
@@ -7,9 +8,21 @@ class SearchReport extends Component {
     await fetch(`api/getreportbyName/?Name=${Name}`)
       .then((respone) => respone.json())
       .then((Result) => {
-        this.setState({
-          Myposts: Result.data,
-        });
+        // console.log(Result.message);
+        if (Result.message == "NotFound") {
+          let myColor = { background: "#0E1717", text: "#FFFFFF" };
+          notify.show(
+            <div style={{ fontSize: 30 }}>Missing Report Not Found</div>,
+            "error",
+            10000,
+            myColor
+          );
+          // alert("Not found");
+        } else {
+          this.setState({
+            Myposts: Result.data,
+          });
+        }
       });
   };
   handleChange = (e) => {
@@ -23,7 +36,7 @@ class SearchReport extends Component {
           <div className="container row  h-100 justify-content-center align-items-center">
             <div class="card">
               <div>
-                {/* <Notifications options={{ zIndex: 200, top: "80px" }} /> */}
+                <Notifications options={{ zIndex: 200, top: "80px" }} />
                 {/* <ToastContainer/> */}
               </div>
               <div class="card-header"></div>

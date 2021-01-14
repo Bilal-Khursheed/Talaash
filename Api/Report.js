@@ -61,8 +61,15 @@ route.get("/getreportbyName/", async (req, res) => {
   await Report.find({ name })
 
     .then((report) => {
-      //console.log(report);
-      return res.json({ status: true, message: "data found", data: report });
+      // console.log("count", report.length);
+      if (report.length === 0) {
+        return res.json({
+          message: "NotFound",
+        });
+      } else {
+        //console.log(report);
+        return res.json({ status: true, message: "datafound", data: report });
+      }
     })
     .catch((err) => console.log("yahan a raha haaaaa" + err));
 });

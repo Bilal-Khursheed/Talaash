@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const route = express.Router();
 route.post("/faceapi", (req, res) => {
   var largeDataSet = [];
+  var count = 0;
   var resultdata = {};
 
   const url = req.query.image;
@@ -13,22 +14,26 @@ route.post("/faceapi", (req, res) => {
     console.log("Pipe data from python script ...");
     var str = data.toString().trim(),
       lines = str.split(",");
-    resultdata = {
-      Name: lines[0],
-      Gender: lines[1],
-      Age: lines[2],
-      Time: lines[3],
-      Address: lines[4],
-      Wear: lines[5],
-      Phone: lines[6],
-    };
+    if (lines[0] == "") {
+      count = count + 1;
+    } else {
+      resultdata = {
+        Name: lines[0],
+        Gender: lines[1],
+        Age: lines[2],
+        Time: lines[3],
+        Address: lines[4],
+        Wear: lines[5],
+        Phone: lines[6],
+      };
+    }
     largeDataSet.push(data);
   });
   python.on("close", (code) => {
     console.log(`child process close all stdio with code ${code}`);
     if (code == 1) {
       return res.json({ message: "not found" });
-    } else res.json({ info: resultdata, message: "found" });
+    } else res.json({ found: count, info: resultdata, message: "found" });
   });
 });
 module.exports = route;

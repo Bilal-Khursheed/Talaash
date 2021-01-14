@@ -23,14 +23,22 @@ class Setting extends Component {
     };
 
     await fetch(
-      `/api/update?email=${userdata.email}&newpassword=${userdata.newPassword}`
+      `/api/update?email=${userdata.email}&newpassword=${userdata.newPassword}&oldPassword=${userdata.oldPassword}`
     )
       .then((respone) => respone.json())
       .then((res) => {
         if (res.message == "Updated") {
           let myColor = { background: "#0E1717", text: "#FFFFFF" };
           notify.show(
-            <div style={{ fontSize: 30 }}>"Updated"</div>,
+            <div style={{ fontSize: 30 }}>Password Updated</div>,
+            "success",
+            10000,
+            myColor
+          );
+        } else if (res.message == "PassNotFound") {
+          let myColor = { background: "#0E1717", text: "#FFFFFF" };
+          notify.show(
+            <div style={{ fontSize: 30 }}>Password Not Correct</div>,
             "error",
             10000,
             myColor
@@ -38,7 +46,7 @@ class Setting extends Component {
         } else {
           let myColor = { background: "#0E1717", text: "#FFFFFF" };
           notify.show(
-            <div style={{ fontSize: 30 }}>"Not found "</div>,
+            <div style={{ fontSize: 30 }}>Not found</div>,
             "error",
             10000,
             myColor
